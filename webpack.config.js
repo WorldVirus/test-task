@@ -24,7 +24,22 @@ module.exports = {
             { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
 
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
+            {
+                test: /\.(html)$/,
+                use: {
+                    loader: 'html-loader',
+                    options: {
+                        attrs: [':data-src']
+                    }
+                }
+            }
         ]
     },
 
@@ -36,11 +51,11 @@ module.exports = {
         "react": "React",
         "react-dom": "ReactDOM"
     },
-    plugins: [  new CleanWebpackPlugin([ './dist/bundle.js','./dist/bundle.js.map' ], {
-        root: __dirname,
-        verbose: true,
-        dry: false
-    })]
+    // plugins: [  new CleanWebpackPlugin([ './dist/bundle.js','./dist/bundle.js.map' ], {
+    //     root: __dirname,
+    //     verbose: true,
+    //     dry: false
+    // })]
     // plugins: [
     //     new ExtractTextPlugin('./bundle.js')
     // ]

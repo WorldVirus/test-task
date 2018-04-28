@@ -25,7 +25,7 @@ var path = require('path');
 // viewed at http://localhost:8080
 app.use(express.static(path.join(__dirname + '/dist')));
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
+    res.render(path.join(__dirname + '/index.html'));
     console.log(__dirname);
 });
 
